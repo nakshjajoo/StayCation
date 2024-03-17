@@ -148,6 +148,9 @@ app.post('/places', (req, res) => {
 
 app.get('/user-places', (req, res) => {
     const {token} = req.cookies;
+    if (!token) {
+        res.json('no token')
+    }
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if (err) {
             console.log(err);
