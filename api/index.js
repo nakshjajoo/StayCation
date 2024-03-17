@@ -24,8 +24,6 @@ app.use(cors({
     origin: 'https://staycation-sigma-brown.vercel.app',
     credentials: true,
   }));
-  
-  
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -38,11 +36,11 @@ const getUserDataFromReq = (req) => {
     });
 }
 
-app.get('/test', cors(), (req, res) => {
+app.get('/test', (req, res) => {
     res.json('test ok')
 });
 
-app.post('/register', cors(), async (req, res) => {
+app.post('/register', async (req, res) => {
     const {name, email, password} = req.body;
     try {
         const findUser = await User.findOne({email});
@@ -60,7 +58,7 @@ app.post('/register', cors(), async (req, res) => {
     }
 });
 
-app.post('/login', cors(), async (req,res) => {
+app.post('/login', async (req,res) => {
     const {email,password} = req.body;
     const userDoc = await User.findOne({email});
     if (userDoc) {
@@ -81,7 +79,7 @@ app.post('/login', cors(), async (req,res) => {
     }
 });  
 
-app.get('/profile', cors(), (req, res) => {
+app.get('/profile', (req, res) => {
     const {token} = req.cookies;
     if (token) {
         jwt.verify(token, jwtSecret, {}, async(err, userData) => {
@@ -94,11 +92,11 @@ app.get('/profile', cors(), (req, res) => {
     }
 });
 
-app.post('/logout', cors(), (req, res) => {
+app.post('/logout', (req, res) => {
     res.cookie('token', '').json(true);
 });
 
-app.post('/upload-by-link', cors(), async (req, res) => {
+app.post('/upload-by-link', async (req, res) => {
     const {link} = req.body;
     const newName = 'photo' + Date.now() + '.jpg'
     const options = {
@@ -110,7 +108,7 @@ app.post('/upload-by-link', cors(), async (req, res) => {
 });
 
 const photosMiddleware = multer({dest: 'uploads/'});
-app.post('/upload', cors(), photosMiddleware.array('photos', 100), (req, res) => {
+app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
     const uploadedFiles = [];
     for (let i = 0; i < req.files.length; i++) {
         const {path, originalname} = req.files[i];
@@ -123,7 +121,7 @@ app.post('/upload', cors(), photosMiddleware.array('photos', 100), (req, res) =>
     res.json(uploadedFiles);
 });
 
-app.post('/places', cors(), (req, res) => {
+app.post('/places', (req, res) => {
     const {token} = req.cookies;
     const {
         title, address, addedPhotos, 
@@ -149,7 +147,7 @@ app.post('/places', cors(), (req, res) => {
     });
 });
 
-app.get('/user-places', cors(), (req, res) => {
+app.get('/user-places', (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         const {id} = userData;
@@ -157,12 +155,12 @@ app.get('/user-places', cors(), (req, res) => {
     });
 });
 
-app.get('/places/:id', cors(), async (req, res) => {
+app.get('/places/:id', async (req, res) => {
     const {id} = req.params;
     res.json(await Place.findById(id));
 });
 
-app.put('/places/', cors(), async (req, res) => {
+app.put('/places/', async (req, res) => {
     const {token} = req.cookies;
     const {
         id,
@@ -192,11 +190,11 @@ app.put('/places/', cors(), async (req, res) => {
     });
 });
 
-app.get('/places', cors(), async (req, res) => {
+app.get('/places', async (req, res) => {
     res.json( await Place.find() )
 });
 
-app.post('/bookings', cors(), async (req, res) => {
+app.post('/bookings', async (req, res) => {
     const userData = await getUserDataFromReq(req);
     const {
         place, checkIn, checkOut, numberOfGuests, name, phone, price
@@ -210,7 +208,7 @@ app.post('/bookings', cors(), async (req, res) => {
       });    
 });
 
-app.get('/bookings', cors(), async (req, res) => {
+app.get('/bookings', async (req, res) => {
     const userData = await getUserDataFromReq(req);
     res.json( await Booking.find({user: userData.id}).populate('place'));
 })
