@@ -31,7 +31,6 @@ const getUserDataFromReq = (req) => {
     return new Promise((resolve, reject) => {
         jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
             if (err) throw err;
-            resolve(userData);
         });
     });
 }
@@ -150,6 +149,10 @@ app.post('/places', (req, res) => {
 app.get('/user-places', (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
         const {id} = userData;
         res.json( await Place.find({owner: id}) );
     });

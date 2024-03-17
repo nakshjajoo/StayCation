@@ -9,6 +9,7 @@ const PlacesPage = () => {
 
   useEffect(() => {
     axios.get('/user-places').then(({data}) => {
+      console.log(data);
       setPlaces(data);
     });
   }, []);
