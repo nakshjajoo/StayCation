@@ -154,6 +154,9 @@ app.get('/user-places', (req, res) => {
             throw err;
         }
         const {id} = userData;
+        if (!id) {
+            res.json(null);
+        }
         res.json( await Place.find({owner: id}) );
     });
 });
