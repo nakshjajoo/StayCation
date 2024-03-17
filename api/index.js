@@ -21,9 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
+    origin: 'https://staycation-sigma-brown.vercel.app',
     credentials: true,
-    origin: 'https://staycation-sigma-brown.vercel.app/',
-}));
+  }));
+  
+  
 
 mongoose.connect(process.env.MONGO_URL);
 
