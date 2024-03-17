@@ -63,21 +63,13 @@ app.post('/login', async (req,res) => {
     if (userDoc) {
       const passOk = bcrypt.compareSync(password, userDoc.password);
       if (passOk) {
-        const token = jwt.sign({
+        jwt.sign({
           email:userDoc.email,
           id:userDoc._id
         }, jwtSecret, {}, (err,token) => {
           if (err) throw err;
           res.cookie('token', token).json(userDoc);
         });
-
-        res.cookie('token', token, {
-            httpOnly: true, // The cookie is not accessible via JavaScript
-            secure: true, // Only send the cookie over HTTPS
-            sameSite: 'None', // Required for cross-origin use
-            maxAge: 60 * 60 * 1000, // Example: cookie will expire in 1 hour
-          });
-                  
       } else {
         res.status(422).json('pass not ok');
       }
