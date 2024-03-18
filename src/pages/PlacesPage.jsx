@@ -8,7 +8,7 @@ const PlacesPage = () => {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    axios.get('/user-places').then(({data}) => {
+    axios.get('https://staycation-sigma-brown.vercel.app/user-places').then(({data}) => {
       console.log(data);
       setPlaces(data);
     });
