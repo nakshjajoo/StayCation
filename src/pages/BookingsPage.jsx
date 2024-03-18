@@ -11,7 +11,7 @@ const BookingsPage = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios.get('/bookings').then(response => {
+    axios.get('https://staycation-sigma-brown.vercel.app/bookings').then(response => {
       setBookings(response.data);
     })
   }, []);

@@ -11,7 +11,7 @@ const ProfilePage = () => {
   let {subpage} = useParams();
 
   const logout = async () => {
-    await axios.post('/logout');
+    await axios.post('https://staycation-sigma-brown.vercel.app/logout');
     setRedirect('/');
     setUser(null);
   }

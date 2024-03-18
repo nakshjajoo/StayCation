@@ -12,7 +12,7 @@ const LoginPage = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post('/login', {email, password});
+      const {data} = await axios.post('https://staycation-sigma-brown.vercel.app/login', {email, password});
       if (data === 'not found') {
         return alert('Could not find user with the specified e-mail and password');
       }

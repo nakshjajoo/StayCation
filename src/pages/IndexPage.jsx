@@ -6,7 +6,7 @@ const IndexPage = () => {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    axios.get('/places').then(response => {
+    axios.get('https://staycation-sigma-brown.vercel.app/places').then(response => {
       setPlaces(response.data);
     })
   }, [])

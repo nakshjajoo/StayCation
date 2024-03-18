@@ -18,7 +18,7 @@ const PlacePage = () => {
       return;
     }
 
-    axios.get(`/places/${id}`).then(response => {
+    axios.get(`https://staycation-sigma-brown.vercel.app/places/${id}`).then(response => {
       setPlace(response.data);
     })
   }, [id]);

@@ -12,7 +12,7 @@ const RegisterPage = () => {
   const registerUser = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post('/register', {
+      const {data} = await axios.post('https://staycation-sigma-brown.vercel.app/register', {
         name, 
         email,
         password,
