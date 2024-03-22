@@ -23,7 +23,7 @@ const PlacesFormPage = () => {
 		if (!id) {
 			return;
 		}
-		axios.get("https://staycation-sigma-brown.vercel.app/places/" + id).then((response) => {
+		axios.get("/places/" + id).then((response) => {
 			const { data } = response;
 			setTitle(data.title);
 			setAddress(data.address);
@@ -69,14 +69,14 @@ const PlacesFormPage = () => {
 		};
 		if (id) {
 			//update
-			await axios.put("https://staycation-sigma-brown.vercel.app/places", {
+			await axios.put("/places", {
 				id,
 				...placeData,
 			});
 			setRedirect(true);
 		} else {
 			//new place
-			await axios.post("https://staycation-sigma-brown.vercel.app/places", placeData);
+			await axios.post("/places", placeData);
 			setRedirect(true);
 		}
 	};

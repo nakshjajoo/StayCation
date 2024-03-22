@@ -30,7 +30,7 @@ const BookingWidget = ({ place }) => {
 		if (!user) {
 			return alert("You need to login to book places!");
 		}
-		const response = await axios.post("https://staycation-sigma-brown.vercel.app/bookings", {
+		const response = await axios.post("/bookings", {
 			checkIn,
 			checkOut,
 			numberofGuests,

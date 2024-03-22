@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
-    origin: 'https://staycation-sigma-brown.vercel.app',
+    origin: 'http://localhost:5173',
     credentials: true,
   }));
 
@@ -29,8 +29,12 @@ mongoose.connect(process.env.MONGO_URL);
 
 const getUserDataFromReq = (req) => {
     return new Promise((resolve, reject) => {
+        if (!req.cookies.token) {
+            return reject(new Error('No token found'));
+        }
         jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
             if (err) throw err;
+            resolve(userData);
         });
     });
 }
@@ -207,17 +211,31 @@ app.get('/places', async (req, res) => {
 });
 
 app.post('/bookings', async (req, res) => {
-    const userData = await getUserDataFromReq(req);
-    const {
-        place, checkIn, checkOut, numberOfGuests, name, phone, price
-    } = req.body;
-    Booking.create({
-        place, checkIn, checkOut, numberOfGuests, name, phone, price, user: userData.id
-      }).then((doc) => {
-        res.json(doc);
-      }).catch((err) => {
-        throw err;
-      });    
+    // const userData = await getUserDataFromReq(req);
+    // const {
+    //     place, checkIn, checkOut, numberOfGuests, name, phone, price
+    // } = req.body;
+    // Booking.create({
+    //     place, checkIn, checkOut, numberOfGuests, name, phone, price, user: userData.id
+    //   }).then((doc) => {
+    //     res.json(doc);
+    //   }).catch((err) => {
+    //     throw err;
+    //   });    
+    try {
+        const userData = await getUserDataFromReq(req);
+        const {
+            place, checkIn, checkOut, numberOfGuests, name, phone, price
+        } = req.body;
+        const booking = await Booking.create({
+            place, checkIn, checkOut, numberOfGuests, name, phone, price, user: userData.id
+        });
+        res.status(201).json(booking);
+    } catch (error) {
+        console.error("Error creating booking:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+
 });
 
 app.get('/bookings', async (req, res) => {
