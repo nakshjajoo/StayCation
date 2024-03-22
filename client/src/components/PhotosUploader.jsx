@@ -6,9 +6,10 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
 
 	const addPhotoByLink = async (e) => {
 		e.preventDefault();
-		const { data: filename } = await axios.post("/upload-by-link", {
-			link: photoLink,
-		});
+		const { data: filename } = await axios.post(
+			"/upload-by-link",
+			{ link: photoLink }
+		);
 		onChange((prev) => {
 			return [...prev, filename];
 		});
@@ -62,7 +63,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
 						<div className="h-40 flex relative" key={link}>
 							<img
 								className="rounded-2xl w-full object-cover"
-								src={"stay-cation.vercel.app/uploads/" + link}
+								src={"http://localhost:4000/uploads/" + link}
 								alt="img"
 							/>
 							<button
