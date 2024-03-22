@@ -1,63 +1,110 @@
 import { useState } from "react";
 
-const PlaceGallery = ({place}) => {
+const PlaceGallery = ({ place }) => {
+	const [showAllPhotos, setShowAllPhotos] = useState(false);
 
-  const [showAllPhotos, setShowAllPhotos] = useState(false);
-  
-  if (showAllPhotos) {
-    return (
-      <div className="absolute inset-0 bg-black text-white min-h-screen">
-        <div className="bg-black p-8 grid gap-4">
-          <div>
-            <h2 className="text-3xl mr-36">{place.title}</h2>
-            <button onClick={() => setShowAllPhotos(false)} className="fixed right-12 top-7 flex gap-1 py-2 px-4 rounded-2xl shadow shadow-gray-500 bg-white text-black">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
-              Close
-            </button>
-          </div>
-          {place?.photos?.length > 0 && place.photos.map(photo => (
-            <div className="flex justify-center" key={photo}>
-              <img className="" src={'http://localhost:4000/uploads/' + photo} alt="" />
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
+	if (showAllPhotos) {
+		return (
+			<div className="absolute inset-0 bg-black text-white min-h-screen">
+				<div className="bg-black p-8 grid gap-4">
+					<div>
+						<h2 className="text-3xl mr-36">{place.title}</h2>
+						<button
+							onClick={() => setShowAllPhotos(false)}
+							className="fixed right-12 top-7 flex gap-1 py-2 px-4 rounded-2xl shadow shadow-gray-500 bg-white text-black"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								strokeWidth={1.5}
+								stroke="currentColor"
+								className="w-6 h-6"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M6 18 18 6M6 6l12 12"
+								/>
+							</svg>
+							Close
+						</button>
+					</div>
+					{place?.photos?.length > 0 &&
+						place.photos.map((photo) => (
+							<div className="flex justify-center" key={photo}>
+								<img
+									className=""
+									src={"stay-cation.vercel.app/uploads/" + photo}
+									alt=""
+								/>
+							</div>
+						))}
+				</div>
+			</div>
+		);
+	}
 
-  return (
-    <div className="relative">
-        <div className="grid gap-2 grid-cols-[2fr_1fr] rounded-2xl overflow-hidden">
-          <div>
-            {place.photos?.[0] && (
-              <div className="overflow-hidden">
-                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150" src={'http://localhost:4000/uploads/' + place.photos[0]} alt="" />
-              </div>
-            )}
-          </div>
-          <div className="grid">
-            {place.photos?.[1] && (
-              <div className="overflow-hidden">
-                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150" src={'http://localhost:4000/uploads/' + place.photos[1]} alt="" />
-              </div>
-            )}
-            <div className="overflow-hidden">
-              {place.photos?.[2] && (
-                <img onClick={() => setShowAllPhotos(true)} className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150 hover:translate-y-2 relative top-2" src={'http://localhost:4000/uploads/' + place.photos[2]} alt="" />
-              )}
-            </div>
-          </div>
-        </div>
-        <button onClick={() => setShowAllPhotos(true)} className="absolute bottom-2 right-2 py-2 px-3 flex gap-1 rounded-lg bg-white shadow-md shadow-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-          Show all photos
-        </button>
-      </div>
-  )
-}
+	return (
+		<div className="relative">
+			<div className="grid gap-2 grid-cols-[2fr_1fr] rounded-2xl overflow-hidden">
+				<div>
+					{place.photos?.[0] && (
+						<div className="overflow-hidden">
+							<img
+								onClick={() => setShowAllPhotos(true)}
+								className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150"
+								src={"stay-cation.vercel.app/uploads/" + place.photos[0]}
+								alt=""
+							/>
+						</div>
+					)}
+				</div>
+				<div className="grid">
+					{place.photos?.[1] && (
+						<div className="overflow-hidden">
+							<img
+								onClick={() => setShowAllPhotos(true)}
+								className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150"
+								src={"stay-cation.vercel.app/uploads/" + place.photos[1]}
+								alt=""
+							/>
+						</div>
+					)}
+					<div className="overflow-hidden">
+						{place.photos?.[2] && (
+							<img
+								onClick={() => setShowAllPhotos(true)}
+								className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150 hover:translate-y-2 relative top-2"
+								src={"stay-cation.vercel.app/uploads/" + place.photos[2]}
+								alt=""
+							/>
+						)}
+					</div>
+				</div>
+			</div>
+			<button
+				onClick={() => setShowAllPhotos(true)}
+				className="absolute bottom-2 right-2 py-2 px-3 flex gap-1 rounded-lg bg-white shadow-md shadow-gray-500"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					strokeWidth={1.5}
+					stroke="currentColor"
+					className="w-6 h-6"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+					/>
+				</svg>
+				Show all photos
+			</button>
+		</div>
+	);
+};
 
-export default PlaceGallery
+export default PlaceGallery;
