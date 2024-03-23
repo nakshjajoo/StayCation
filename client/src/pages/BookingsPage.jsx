@@ -10,7 +10,7 @@ const BookingsPage = () => {
 	const [bookings, setBookings] = useState([]);
 
 	useEffect(() => {
-		axios.get("stay-cation.vercel.app/bookings").then((response) => {
+		axios.get("/bookings").then((response) => {
 			setBookings(response.data);
 		});
 	}, []);

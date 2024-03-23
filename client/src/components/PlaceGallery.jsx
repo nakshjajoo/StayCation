@@ -35,7 +35,7 @@ const PlaceGallery = ({ place }) => {
 							<div className="flex justify-center" key={photo}>
 								<img
 									className=""
-									src={"stay-cation.vercel.app/uploads/" + photo}
+									src={"http://localhost:4000/uploads/" + photo}
 									alt=""
 								/>
 							</div>
@@ -54,7 +54,7 @@ const PlaceGallery = ({ place }) => {
 							<img
 								onClick={() => setShowAllPhotos(true)}
 								className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150"
-								src={"stay-cation.vercel.app/uploads/" + place.photos[0]}
+								src={"http://localhost:4000/uploads/" + place.photos[0]}
 								alt=""
 							/>
 						</div>
@@ -66,7 +66,7 @@ const PlaceGallery = ({ place }) => {
 							<img
 								onClick={() => setShowAllPhotos(true)}
 								className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150"
-								src={"stay-cation.vercel.app/uploads/" + place.photos[1]}
+								src={"http://localhost:4000/uploads/" + place.photos[1]}
 								alt=""
 							/>
 						</div>
@@ -76,7 +76,7 @@ const PlaceGallery = ({ place }) => {
 							<img
 								onClick={() => setShowAllPhotos(true)}
 								className="cursor-pointer aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150 hover:translate-y-2 relative top-2"
-								src={"stay-cation.vercel.app/uploads/" + place.photos[2]}
+								src={"http://localhost:4000/uploads/" + place.photos[2]}
 								alt=""
 							/>
 						)}

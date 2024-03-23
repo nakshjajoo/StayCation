@@ -11,7 +11,7 @@ const ProfilePage = () => {
 	let { subpage } = useParams();
 
 	const logout = async () => {
-		await axios.post("stay-cation.vercel.app/logout");
+		await axios.post("/logout");
 		setRedirect("/");
 		setUser(null);
 	};

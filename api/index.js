@@ -21,9 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
-    origin: 'https://staycation-theta.vercel.app/',
+    origin: 'http://localhost:5173',
     credentials: true,
   }));
+
+  //https://staycation-theta.vercel.app
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -206,9 +208,21 @@ app.put('/places/', async (req, res) => {
     });
 });
 
+// app.get('/places', async (req, res) => {
+//     res.json( await Place.find() )
+// });
+
 app.get('/places', async (req, res) => {
-    res.json( await Place.find() )
+    try {
+        const places = await Place.find();
+        console.log("Places: " + places);
+        res.json(places);
+    } catch (error) {
+        console.error("Error fetching places:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 });
+
 
 app.post('/bookings', async (req, res) => {
     // const userData = await getUserDataFromReq(req);
