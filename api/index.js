@@ -26,7 +26,7 @@ app.use(cors({
   }));
 
 const MONGO_URL = 'mongodb+srv://staycation:staycation@cluster0.f25onbv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-mongoose.connect(MONGO_URL);
+mongoose.connect(process.env.MONGO_URL);
 
 const getUserDataFromReq = (req) => {
     return new Promise((resolve, reject) => {
