@@ -31,6 +31,7 @@ const BookingWidget = ({ place }) => {
 			return alert("You need to login to book places!");
 		}
 		const response = await axios.post("/bookings", {
+			user,
 			checkIn,
 			checkOut,
 			numberofGuests,

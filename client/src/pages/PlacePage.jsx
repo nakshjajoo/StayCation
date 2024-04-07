@@ -14,10 +14,6 @@ const PlacePage = () => {
 	const [showAllPhotos, setShowAllPhotos] = useState(false);
 	const { user, setUser } = useContext(UserContext);
 
-	if (!user) {
-		return <Navigate to={"/"} />;
-	}
-
 	useEffect(() => {
 		if (!id) {
 			return;

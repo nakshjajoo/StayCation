@@ -12,7 +12,6 @@ import BookingsPage from "./pages/BookingsPage";
 import BookingPage from "./pages/BookingPage";
 import NotFound404 from "./pages/NotFound404";
 
-//stay-cation.vercel.app
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 axios.defaults.withCredentials = true;
 

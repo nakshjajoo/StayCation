@@ -21,11 +21,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://staycation-theta.vercel.app/',
     credentials: true,
   }));
 
-const MONGO_URL = 'mongodb+srv://staycation:staycation@cluster0.f25onbv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 mongoose.connect(process.env.MONGO_URL);
 
 const getUserDataFromReq = (req) => {
@@ -40,7 +39,7 @@ const getUserDataFromReq = (req) => {
     });
 }
 
-app.get('/test', (req, res) => {
+app.get('/', (req, res) => {
     res.json('test ok')
 });
 
@@ -230,15 +229,20 @@ app.post('/bookings', async (req, res) => {
         });
         res.status(201).json(booking);
     } catch (error) {
-        console.error("Error creating booking:", error);
+        console.error("Error creating booking: ", error);
         res.status(500).json({ error: "Internal server error" });
     }
 
 });
 
 app.get('/bookings', async (req, res) => {
-    const userData = await getUserDataFromReq(req);
-    res.json( await Booking.find({user: userData.id}).populate('place'));
+    try {
+        const userData = await getUserDataFromReq(req);
+        res.json( await Booking.find({user: userData.id}).populate('place'));
+    } catch (error) {
+        console.error("Error getting bookings: ", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 })
 
 app.get('/*', (req, res) => {
