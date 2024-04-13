@@ -7,13 +7,16 @@ const IndexPage = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		axios.get('/places').then((response) => {
-			setPlaces(response.data);
-			setLoading(false);
-		}).catch(error => {
-			console.error("Error fetching places" + error);
-			setLoading(false);
-		});
+		axios
+			.get("/places")
+			.then((response) => {
+				setPlaces(response.data);
+				setLoading(false);
+			})
+			.catch((error) => {
+				console.error("Error fetching places" + error);
+				setLoading(false);
+			});
 	}, []);
 
 	const formatCurrency = new Intl.NumberFormat("en-us");
@@ -31,7 +34,10 @@ const IndexPage = () => {
 							{place.photos?.[0] && (
 								<img
 									className="rounded-2xl aspect-square object-cover transition-all hover:opacity-80 hover:scale-105 duration-150"
-									src={`${import.meta.env.VITE_BASE_URL}/uploads/` + place.photos?.[0]}
+									src={
+										`${import.meta.env.VITE_BASE_URL}/uploads/` +
+										place.photos?.[0]
+									}
 									alt="img"
 								/>
 							)}

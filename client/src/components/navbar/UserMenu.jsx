@@ -5,26 +5,26 @@ import MenuItems from "./MenuItems";
 const UserMenu = () => {
 	const { user } = useContext(UserContext);
 	const [isOpen, setIsOpen] = useState(false);
-  // Ref to attach to the div
-  const divRef = useRef(null);
+	// Ref to attach to the div
+	const divRef = useRef(null);
 
 	const toggleOpen = useCallback(() => {
 		setIsOpen((value) => !value);
 	});
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (divRef.current && !divRef.current.contains(event.target)) {
-        setIsOpen(false); // Hide the div if the click is outside
-      }
-    }
-    // Add when the component mounts
-    document.addEventListener('mousedown', handleClickOutside);
-    // Remove event listener on cleanup
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [divRef]);
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (divRef.current && !divRef.current.contains(event.target)) {
+				setIsOpen(false); // Hide the div if the click is outside
+			}
+		}
+		// Add when the component mounts
+		document.addEventListener("mousedown", handleClickOutside);
+		// Remove event listener on cleanup
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [divRef]);
 
 	return (
 		<div>
@@ -64,22 +64,25 @@ const UserMenu = () => {
 			</div>
 
 			{isOpen && (
-				<div ref={divRef} className="absolute rounded-xl shadow-md w-[15vw] bg-white overflow-hidden right-7 top-15 text-sm">
+				<div
+					ref={divRef}
+					className="absolute rounded-xl shadow-md w-[15vw] bg-white overflow-hidden right-7 top-15 text-sm"
+				>
 					<div className="flex flex-col cursor-pointer">
 						<>
 							{!user && (
 								<>
-									<MenuItems to={'/login'} label={"Log in"} />
-									<MenuItems to={'/register'} label="Sign up" />
+									<MenuItems to={"/login"} label={"Log in"} />
+									<MenuItems to={"/register"} label="Sign up" />
 								</>
 							)}
-              {user && (
-                <>
-                  <MenuItems to={'/account/bookings'} label="My Bookings" />
-                  <MenuItems to={'account/places'} label="My accomodations" />
-                  <MenuItems to={'/'} label="Logout" />
-                </>
-              )}
+							{user && (
+								<>
+									<MenuItems to={"/account/bookings"} label="My Bookings" />
+									<MenuItems to={"account/places"} label="My accomodations" />
+									<MenuItems to={"/"} label="Logout" />
+								</>
+							)}
 						</>
 					</div>
 				</div>
