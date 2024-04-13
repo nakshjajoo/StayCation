@@ -30,6 +30,9 @@ const BookingWidget = ({ place }) => {
 		if (!user) {
 			return alert("You need to login to book places!");
 		}
+		if (!checkIn || !checkOut || !numberofGuests || !name || !phone) {
+			return alert("You need to fill all the required fields");
+		}
 		const response = await axios.post("/bookings", {
 			user,
 			checkIn,

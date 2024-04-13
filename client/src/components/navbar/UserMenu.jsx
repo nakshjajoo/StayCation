@@ -69,8 +69,8 @@ const UserMenu = () => {
 						<>
 							{!user && (
 								<>
-									<MenuItems to={'/register'} label="Sign up" />
 									<MenuItems to={'/login'} label={"Log in"} />
+									<MenuItems to={'/register'} label="Sign up" />
 								</>
 							)}
               {user && (

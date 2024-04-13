@@ -15,7 +15,7 @@ import NotFound404 from "./pages/NotFound404";
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 axios.defaults.withCredentials = true;
 
-function App() {
+function App() { 
 	return (
 		<UserContextProvider>
 			<Routes>
